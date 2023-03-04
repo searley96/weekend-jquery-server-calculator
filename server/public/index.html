@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vendors/jquery.js"></script>
+    <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <h1>Server Side Calculator</h1>
+    
+  <table>
+    <tr>
+        <!-- input field for first number -->
+        <td><input type="number" id="firstNumberInputField" placeholder="First Number"></td>
+       
+        <!-- addition button -->
+        <td><button id="additionBtn">+</button></td>
+        
+        <!-- subtraction button -->
+        <td><button id="subtractionBtn">-</button></td>
+        
+        <!-- multiplication button -->
+        <td><button id="multiplicationBtn">*</button></td>
+        
+        <!-- division button -->
+        <td><button id="divisionBtn">/</button></td>
+        
+        <!-- input field for second number -->
+        <td><input type="number" id="secondNumberInputField" placeholder="Second Number"></td>
+        
+        <!-- equals button -->
+        <td><button id="equalsBtn">=</button></td>
+        
+        <!-- clear button -->
+        <td><button id="clearBtn">C</button></td>
+    </tr>
+  </table>
+
+  <div id="calucaltionTotal">
+<!-- this will be the last calculation -->
+  </div>
+
+  <div id="calculationHistory">
+    <!-- this will be an unordered list -->
+  </div>
+
+</body>
+</html>
