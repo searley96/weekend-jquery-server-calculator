@@ -1,7 +1,9 @@
 $(document).ready(handleReady);
 
-// let calculations = [];
-let sign = ""
+let calculations = [];
+let sign = "";
+answer = 0;
+
 
 function handleReady() {
     console.log("jquery is loaded!");
@@ -40,19 +42,13 @@ function divideCalculation() {
 
 
 
-
-// function additionCalculation() {
-//    let addition =  (Number(submitCalculation.firstNumberInput) + Number(submitCalculation.secondNumberInput))
-//     console.log('addition calculation', addition)
-//    };
-
 function getCalculation() {
     $.ajax({
         method: 'GET',
         url: '/calculations'
-    }).then(function(response){
-        // calculations = response;
-        // render();
+    }).then((response) => {
+        calculations = response;
+        render(response);
     }).catch (function(err){
         alert('Unable to get calculations. Try again later.');
         console.log(err)
@@ -61,19 +57,21 @@ function getCalculation() {
 
 function submitCalculation() {
     //get values from input
-    let calculations = {
+    let calculation = {
         firstNumberInput: $('#firstNumberInputField').val(),
         signOperator: sign,
-        secondNumberInput: $('#secondNumberInputField').val()
+        secondNumberInput: $('#secondNumberInputField').val(),
     }
-   console.log('calculation', calculations);
+
+   console.log('calculation', calculation);
    //ajax to server
    $.ajax({
     method: 'POST',
     url: '/addCalculations',
-    data: calculations
+    data: calculation
    }).then((response)=> {
     console.log('post finished')
+    render(response);
     $('#firstNumberInputField').val(""),
     $('#secondNumberInputField').val("")
     getCalculation()
@@ -88,10 +86,15 @@ function render(){
     $("#secondNumberInputField").empty();
 
 
-    for (let calculation of calculations) {
+    for (let math of calculations) {
+        
+        $("#calucaltionTotal").append(`
+        <p>${math.answer}</p>
+        `)
+
         $("#calculationHistory").append(`
         <ul>
-            <li>${calculation.firstNumberInput} ${calculation.signOperator} ${calculation.secondNumberInput}</li>
+            <li>${math.firstNumberInput} ${math.signOperator} ${math.secondNumberInput}</li>
         </ul>
         `)
 
