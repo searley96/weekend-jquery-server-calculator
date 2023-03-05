@@ -14,7 +14,7 @@ app.listen(PORT, () => {
     console.log ('Server is running on port', PORT)
   })
 
-  answer = 0;
+  
   
   // empty array for data
 //   let calculations = [
@@ -51,17 +51,41 @@ app.listen(PORT, () => {
     
     //LOGIC GOES HERE
  
-      if (sign == '+') {
+      if (sign === '+') {
         console.log("sign", sign)
         answerValue = firstNumberInput + secondNumberInput;
         console.log("answer", answerValue)
         req.body.answer = answerValue;
         console.log(req.body)
         calculations.push(req.body);
-        // console.log('calcualtions', calculations )
+      }
+      else if (sign === '-') {
+          console.log("sign", sign)
+          answerValue = firstNumberInput - secondNumberInput;
+          console.log("answer", answerValue)
+          req.body.answer = answerValue;
+          console.log(req.body)
+          calculations.push(req.body);
+      }
+      else if (sign === '*') {
+            console.log("sign", sign)
+            answerValue = firstNumberInput * secondNumberInput;
+            console.log("answer", answerValue)
+            req.body.answer = answerValue;
+            console.log(req.body)
+            calculations.push(req.body);
+      }
+      else if (sign === '/') {
+              console.log("sign", sign)
+              answerValue = firstNumberInput / secondNumberInput;
+              console.log("answer", answerValue)
+              req.body.answer = answerValue;
+              console.log(req.body)
+              calculations.push(req.body);
 
-    }
-  
+     }
+    console.log("answer", req.body.answer)
+    console.log("qnswerValue", answerValue)
 
     res.sendStatus(201);
 

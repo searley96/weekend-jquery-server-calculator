@@ -3,6 +3,9 @@ $(document).ready(handleReady);
 let calculations = [];
 let sign = "";
 answer = 0;
+firstNumberInput = 0;
+secondNumberInput = 0;
+
 
 
 function handleReady() {
@@ -18,7 +21,11 @@ function handleReady() {
 
     $("#divisionBtn").on("click", divideCalculation);
 
+    $("#clearBtn").on("click", deleteInputFields);
+
 }
+
+
 
 function addCalculation() {
     sign = `+`;
@@ -40,6 +47,13 @@ function divideCalculation() {
     console.log("sign:", sign);
 }
 
+function deleteInputFields() {
+    sign = `C`;
+    console.log("sign:", sign);
+    $('#firstNumberInputField').val(""),
+    $('#secondNumberInputField').val("")
+   };
+
 
 
 function getCalculation() {
@@ -53,6 +67,7 @@ function getCalculation() {
         alert('Unable to get calculations. Try again later.');
         console.log(err)
     })
+   
 }
 
 function submitCalculation() {
@@ -71,42 +86,34 @@ function submitCalculation() {
     data: calculation
    }).then((response)=> {
     console.log('post finished')
-    render(response);
-    $('#firstNumberInputField').val(""),
-    $('#secondNumberInputField').val("")
     getCalculation()
    
    })
-//    render()
-   //deal with response
+
 };
 
+
+
 function render(){
-    $("#firstNumberInputField").empty();
-    $("#secondNumberInputField").empty();
+   
+    $("#calucaltionTotal").empty();
+    $("#calculationHistory").empty();
+   
 
+    $("#calucaltionTotal").append(`
+    <h2>${calculations[calculations.length-1].answer}</h2>
+    `)
 
-    for (let math of calculations) {
+    for (let values of calculations) {
         
-        $("#calucaltionTotal").append(`
-        <p>${math.answer}</p>
-        `)
 
         $("#calculationHistory").append(`
         <ul>
-            <li>${math.firstNumberInput} ${math.signOperator} ${math.secondNumberInput}</li>
+            <li>${values.firstNumberInput} ${values.signOperator} ${values.secondNumberInput} = ${values.answer}</li>
         </ul>
         `)
 
     }
 
-//     $("calucaltionTotal").append(`
     
-//     `)
-
-    // $("calculationHistory").append(`
-    // <ul>
-    //     <li>${submitCalculation.firstNumberInput} ${submitCalculation.secondNumberInput}</li>
-    // </ul>
-    // `)
 }
